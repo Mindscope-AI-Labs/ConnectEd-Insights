@@ -78,6 +78,12 @@ ConnectEd-Insights/
    ```
    Alternatively, configure your API key directly in the code as needed.
 
+   - Create .env in the root directory of the project and add your API key as follows:
+    ```bash
+     OPENAI_API_KEY=your_openai_api_key
+    ```
+
+
 ## Running the Application
 
 Start the Streamlit app by running:
@@ -119,4 +125,3 @@ For questions or feedback, please reach out via [Mindscope-AI-Labs Support](mail
 ---
 
 *Developed as part of the AI for Connectivity Hackathon II: Barcelona Edition.*
-```
