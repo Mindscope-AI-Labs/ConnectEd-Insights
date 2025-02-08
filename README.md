@@ -55,6 +55,8 @@ ConnectEd-Insights/
 2. **Create and Activate a Virtual Environment (Recommended):**
    ```bash
    python -m venv venv
+   # or
+   virtualenv venv
    # Windows:
    venv\Scripts\activate
    # macOS/Linux:
