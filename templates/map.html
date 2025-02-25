@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>School Connectivity Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+        .legend {
+            position: absolute;
+            bottom: 30px;
+            right: 10px;
+            z-index: 1000;
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4CAF50;"></div>
+            <span>Adequate Connectivity (>20Mbps)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #FFC107;"></div>
+            <span>Moderate Connectivity (10-20Mbps)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #F44336;"></div>
+            <span>Poor Connectivity (<10Mbps)</span>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize map
+        const map = L.map('map').setView([-0.0236, 37.9062], 6); // Center on Kenya
+        
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // School data from backend
+        const schools = {{ schools | tojson }};
+
+        // Create markers with status-based coloring
+        schools.forEach(school => {
+            const color = getColor(school.connectivity_status);
+            const marker = L.circleMarker(
+                [school.latitude, school.longitude], 
+                {
+                    radius: 6,
+                    color: '#333',
+                    weight: 1,
+                    fillColor: color,
+                    fillOpacity: 0.8
+                }
+            ).addTo(map);
+
+            // Popup content
+            const popupContent = `
+                <strong>${school.name}</strong><br>
+                <b>Status:</b> ${school.connectivity_status}<br>
+                <b>Speed:</b> ${school.current_connectivity.toFixed(1)}Mbps<br>
+                <b>Students:</b> ${school.students_affected}
+            `;
+
+            marker.bindPopup(popupContent);
+        });
+
+        function getColor(status) {
+            return {
+                'adequate': '#4CAF50',
+                'moderate': '#FFC107',
+                'poor': '#F44336'
+            }[status] || '#999';
+        }
+    </script>
+</body>
+</html>

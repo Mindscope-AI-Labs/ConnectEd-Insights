@@ -1,0 +1,109 @@
+/* Base Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Top Menu */
+.top-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    background: #2c3e50;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    z-index: 1000;
+}
+
+.menu-left h1 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.menu-right a {
+    color: white;
+    text-decoration: none;
+    margin-left: 2rem;
+    transition: color 0.3s;
+}
+
+.menu-right a:hover {
+    color: #3498db;
+}
+
+/* Left Sidebar */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 60px; /* Below top menu */
+    bottom: 0;
+    width: 240px;
+    background: #34495e;
+    color: white;
+    padding: 1.5rem;
+    overflow-y: auto;
+    z-index: 999;
+}
+
+.nav-header h3 {
+    color: #bdc3c7;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.nav-links {
+    list-style: none;
+}
+
+.nav-links li {
+    margin: 0.5rem 0;
+}
+
+.nav-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.nav-links a:hover {
+    background: #2c3e50;
+    color: #3498db;
+}
+
+.nav-links i {
+    width: 25px;
+    margin-right: 1rem;
+}
+
+.divider {
+    height: 1px;
+    background: #46627f;
+    margin: 1.5rem 0;
+}
+
+/* Main Content */
+.content {
+    margin-left: 240px; /* Same as sidebar width */
+    margin-top: 60px; /* Same as top menu height */
+    padding: 2rem;
+    min-height: calc(100vh - 60px);
+    background: #f5f6fa;
+}
+
+/* Map Page Adjustments */
+#map {
+    margin-left: 240px;
+    height: calc(100vh - 60px);
+    width: calc(100% - 240px);
+}
