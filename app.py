@@ -137,12 +137,16 @@ async def get_connectivity_gaps(
 
     return analyze_connectivity_gaps(SCHOOLS_DATA, min_speed, region)
 
+# New API endpoint for getting all schools
+@app.get("/api/schools", response_model=List[School])
+async def get_all_schools():
+    return SCHOOLS_DATA
+
 @app.get("/map", response_class=HTMLResponse)
 async def show_schools_map(request: Request):
-    school_dicts = [school.dict() for school in SCHOOLS_DATA]
     return templates.TemplateResponse(
         "map.html",
-        {"request": request, "schools": school_dicts}
+        {"request": request}
     )
 
 # Other endpoints remain the same...
