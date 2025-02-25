@@ -6,6 +6,10 @@
     font-family: 'Segoe UI', sans-serif;
 }
 
+body {
+    overflow: hidden;
+}
+
 /* Top Menu */
 .top-menu {
     position: fixed;
@@ -42,20 +46,19 @@
 .sidebar {
     position: fixed;
     left: 0;
-    top: 60px; /* Below top menu */
+    top: 60px;
     bottom: 0;
     width: 240px;
     background: #34495e;
     color: white;
     padding: 1.5rem;
     overflow-y: auto;
-    z-index: 999;
+    z-index: 900;
 }
 
 .nav-header h3 {
-    color: #bdc3c7;
-    font-size: 1rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .nav-links {
@@ -67,43 +70,82 @@
 }
 
 .nav-links a {
-    color: #ecf0f1;
+    color: white;
     text-decoration: none;
     display: flex;
     align-items: center;
-    padding: 0.75rem;
+    padding: 0.5rem;
     border-radius: 4px;
-    transition: all 0.3s;
+    transition: background-color 0.3s;
 }
 
 .nav-links a:hover {
-    background: #2c3e50;
-    color: #3498db;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .nav-links i {
-    width: 25px;
-    margin-right: 1rem;
+    margin-right: 0.5rem;
+    width: 20px;
+    text-align: center;
 }
 
 .divider {
-    height: 1px;
-    background: #46627f;
-    margin: 1.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 1rem 0;
 }
 
 /* Main Content */
 .content {
-    margin-left: 240px; /* Same as sidebar width */
-    margin-top: 60px; /* Same as top menu height */
-    padding: 2rem;
-    min-height: calc(100vh - 60px);
+    position: fixed;
+    top: 60px;
+    left: 240px;
+    right: 0;
+    bottom: 0;
+    overflow: auto;
     background: #f5f6fa;
 }
 
-/* Map Page Adjustments */
+/* Map Styles */
 #map {
-    margin-left: 240px;
-    height: calc(100vh - 60px);
-    width: calc(100% - 240px);
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.legend {
+    position: absolute;
+    bottom: 30px;
+    right: 10px;
+    z-index: 1000;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+/* Leaflet Popup Customization */
+.leaflet-popup-content-wrapper {
+    border-radius: 4px;
+}
+
+.leaflet-popup-content {
+    margin: 10px;
+    line-height: 1.5;
+}
+
+.leaflet-popup-content b {
+    color: #2c3e50;
 }
